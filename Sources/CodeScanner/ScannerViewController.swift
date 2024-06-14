@@ -471,6 +471,10 @@ extension CodeScannerView.ScannerViewController: AVCaptureMetadataOutputObjectsD
 
             case .continuous:
                 if isPastScanInterval {
+                    viewFinder?.setImageColor(color: .systemGreen)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + parentView.scanInterval) {
+                        self.viewFinder?.setImageColor(color: .white)
+                    }
                     found(result)
                 }
 
@@ -595,4 +599,13 @@ public extension AVCaptureDevice {
     }
     
 }
+
+extension UIImageView {
+    func setImageColor(color: UIColor) {
+        let templateImage = self.image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        self.image = templateImage
+        self.tintColor = color
+    }
+}
+
 #endif
