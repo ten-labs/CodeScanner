@@ -34,6 +34,16 @@ extension CodeScannerView {
             }
         }
 
+        private lazy var viewFinder: UIImageView? = {
+            guard let image = UIImage(named: "viewfinder", in: .module, with: nil) else {
+                return nil
+            }
+
+            let imageView = UIImageView(image: image)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            return imageView
+        }()
+
         public init(showViewfinder: Bool = false, parentView: CodeScannerView) {
             self.parentView = parentView
             self.showViewfinder = showViewfinder
@@ -104,16 +114,6 @@ extension CodeScannerView {
         
         var captureSession: AVCaptureSession?
         var previewLayer: AVCaptureVideoPreviewLayer!
-
-        private lazy var viewFinder: UIImageView? = {
-            guard let image = UIImage(named: "viewfinder", in: .module, with: nil) else {
-                return nil
-            }
-
-            let imageView = UIImageView(image: image)
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            return imageView
-        }()
         
         private lazy var manualCaptureButton: UIButton = {
             let button = UIButton(type: .system)
